@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Botón de regreso -->
+      <ion-back-button defaultHref="/lista-empleados"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Crear Empleado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #empleadoForm="ngForm" (ngSubmit)="guardar(empleadoForm)">
+    
+    <!-- Id obligatorio y numérico -->
+    <ion-item>
+      <ion-label position="floating">ID</ion-label>
+      <ion-input type="number" [(ngModel)]="empleado.id" name="id" required></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="empleadoForm.submitted && !empleado.id">
+      El ID es obligatorio y debe ser numérico
+    </ion-note>
+
+    <!-- Nombre -->
+    <ion-item>
+      <ion-label position="floating">Nombre Completo</ion-label>
+      <ion-input type="text" [(ngModel)]="empleado.nombreCompleto" name="nombreCompleto" required></ion-input>
+    </ion-item>
+
+    <!-- Fecha con ion-datetime-button -->
+    <ion-item>
+      <ion-label>Fecha de Contratación</ion-label>
+      <ion-datetime-button datetime="fechaContratacion"></ion-datetime-button>
+    </ion-item>
+
+    <!-- Modal que se abre automáticamente -->
+    <ion-modal keepContentsMounted="true">
+      <ng-template>
+        <ion-datetime
+          id="fechaContratacion"
+          presentation="date"
+          [(ngModel)]="empleado.fechaContratacion"
+          name="fechaContratacion"
+          required>
+        </ion-datetime>
+      </ng-template>
+    </ion-modal>
+
+    <!-- Cargo -->
+    <ion-item>
+      <ion-label position="floating">Cargo</ion-label>
+      <ion-input type="text" [(ngModel)]="empleado.cargo" name="cargo"></ion-input>
+    </ion-item>
+
+    <!-- Salario -->
+    <ion-item>
+      <ion-label position="floating">Salario</ion-label>
+      <ion-input type="number" [(ngModel)]="empleado.salario" name="salario" required></ion-input>
+    </ion-item>
+
+    <!-- Departamento -->
+    <ion-item>
+      <ion-label position="floating">Departamento</ion-label>
+      <ion-input type="text" [(ngModel)]="empleado.departamento" name="departamento"></ion-input>
+    </ion-item>
+
+    <!-- Botón Guardar -->
+    <ion-button expand="block" type="submit" color="primary">
+      Guardar
+    </ion-button>
+  </form>
+</ion-content>
